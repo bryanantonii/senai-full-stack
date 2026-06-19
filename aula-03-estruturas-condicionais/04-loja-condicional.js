@@ -8,37 +8,29 @@ let valorCompra = 180;
 let temCupom = true;
 let ehAlunoSENAI = false;
 let formaPagamento = "pix";
-let desconto1 = 0;
-let desconto2 = 0;
-let descontoTotal = desconto1 + desconto2;
-let valorFinal = valorCompra - descontoTotal;
-let frete = valorFinal >= FRETE_LIMITE ? 0 : FRETE_VALOR;
-let totalAPagar = valorFinal + frete;
-let valorAposDesconto1 = valorCompra - desconto1;
+let descontoTotal = 0; 
 
+if(valorCompra >= FRETE_LIMITE){
+    frete = 0;
+}else{
+    frete = FRETE_VALOR;
+} 
 
-if (temCupom || ehAlunoSENAI) {
-    desconto1 = valorCompra * DESCONTO_CUPOM_OU_ALUNO;
-}
+if(temCupom || ehAlunoSENAI){
+    descontoTotal += DESCONTO_CUPOM_OU_ALUNO;
+} 
 
+if(formaPagamento === "pix"){
+    descontoTotal += DESCONTO_PIX;
+}else if(formaPagamento === "boleto"){
+    descontoTotal += DESCONTO_BOLETO;
+} 
 
-switch (formaPagamento) {
-    case "pix":
-        desconto2 = valorAposDesconto1 * DESCONTO_PIX;
-        break;
-    case "boleto":
-        desconto2 = valorAposDesconto1 * DESCONTO_BOLETO;
-        break;
-    case "credito":
-        desconto2 = 0;
-        break;
-    default:
-        console.log("Forma de pagamento inválida.");
-        process.exit(1);
-}
+valorAposDesconto1 = valorCompra * (1 - descontoTotal);
+valorFinal = valorAposDesconto1 + frete;
+totalAPagar = valorFinal; 
 
-
-console.log("Valor original: R$ " + valorCompra.toFixed(2));
-console.log("Desconto aplicado: R$ " + descontoTotal.toFixed(2));
+console.log("Valor da compra: R$ " + valorCompra.toFixed(2));
 console.log("Frete: R$ " + frete.toFixed(2));
-console.log("Total a pagar: R$ " + totalAPagar.toFixed(2));
+console.log("Desconto total: " + (descontoTotal * 100).toFixed(2) + "%");
+console.log("Valor final a pagar: R$ " + totalAPagar.toFixed(2));
