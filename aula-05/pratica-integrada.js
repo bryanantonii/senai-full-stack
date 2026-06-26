@@ -19,8 +19,10 @@ for(let i = 0; i < notasAlunos.length; i++){
 for(let i = 0; i < alunos.length; i++){
     if(notasAlunos[i] >= 7 && frequenciaAlunos[i] >= 75){
     console.log("Aluno: "+ alunos[i] + " foi aprovado");   
-} else{
-     console.log("Aluno: "+ alunos[i] + " foi reprovado");  
+} else if(notasAlunos[i] >=5 && frequenciaAlunos[i] >= 75){
+     console.log("Aluno: "+ alunos[i] + " está de recuperação");  
+}else{
+     console.log("Aluno: "+ alunos[i] + " foi reprovado");
 }
 } 
 
@@ -47,8 +49,10 @@ switch (opcao) {
         for(let i = 0; i < alunos.length; i++){
     if(notasAlunos[i] >= 7 && frequenciaAlunos[i] >= 75){
     console.log("Aluno: "+ alunos[i] + " foi aprovado");   
-    } else{
-     console.log("Aluno: "+ alunos[i] + " foi reprovado");  
+    } else if(notasAlunos[i] >=5 && frequenciaAlunos[i] >= 75){
+     console.log("Aluno: "+ alunos[i] + " está de recuperação");  
+}else{
+    console.log("Aluno: "+ alunos[i] + "foi reprovado!");
 }
 } 
         break;
@@ -56,17 +60,21 @@ switch (opcao) {
         console.log("----- Resumo da Turma -----");
         let aprovados = 0;
         let reprovados = 0;
+        let recuperacao = 0;
         
         for(let i = 0; i < alunos.length; i++){
-            if(notasAlunos [i] >= 7 && frequenciaAlunos >=75){
+            if(notasAlunos[i] >= 7 && frequenciaAlunos[i] >=75){
                 aprovados++;
+            }else if(notasAlunos[i] >=5 && frequenciaAlunos[i] >=75){
+                recuperacao++;
             }else{
                 reprovados++;
             }
         }
-        console.log("Total de Alunos: "+alunos.lenght);
+        console.log("Total de Alunos: " + alunos.lenght);
         console.log("Quantidade de aprovados: "+aprovados);
         console.log("Quantidade de reprovados: "+reprovados);
+        console.log("Quantidade de recuperação: "+recuperacao)
         break;
 
         default:
